@@ -1,0 +1,59 @@
+<table class="table table-stripped">
+    <tr">
+        <th>Data</th>
+        <th>Nadawca</th>
+        <th>Odbiorca</th>
+        <th>Kwota przed</th>
+        <th>Przelew</th>
+        <th>Kwota po</th>
+    </tr>
+    <tr ng-repeat="transfer in ctrl.history">
+        <td ng-bind="ctrl.formatDateTime(transfer.date)"></td>
+        <td ng-bind="transfer.senderFirstName+' '+transfer.senderLastName"></td>
+        <td ng-bind="transfer.recipientFirstName+' '+transfer.recipientLastName"></td>
+        <td ng-bind="transfer.amount_after - transfer.delta"></td>
+        <td ng-bind="transfer.delta"></td>
+        <td ng-bind="transfer.amount_after"></td>
+    </tr>
+</table>
+
+<br/><br/>
+
+<!-- <div class="panel panel-default">
+    <div class="panel-heading">Przelew stały</div>
+    <div class="panel-body">
+        <form class="form form-inline">
+            <select class="form-control" ng-model="ctrl.uniqueHelp" ng-options="option.recipientFirstName+' '+option.recipientLastName for option in ctrl.uniqueHistory track by option._id"></select>
+            <input class="form-control" type="number" ng-model="ctrl.transfer.delta"/>
+            <button class="btn btn-default" ng-click="ctrl.doTransfer2()" ng-disabled="ctrl.transfer.delta > ctrl.amount">Przelej</button>
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Przelew</div>
+    <div class="panel-body">
+        <form class="form form-inline">
+            <input class="form-control" type="text" ng-model="ctrl.recipient._id"/>
+            <input class="form-control" type="number" ng-model="ctrl.transfer2.delta"/>
+            <button class="btn btn-default" ng-click="ctrl.doTransfer()" ng-disabled="ctrl.transfer2.delta > ctrl.amount">Przelej</button>
+        </form>
+    </div>
+</div> -->
+
+<div class="panel panel-default">
+    <div class="panel-heading">Przelew</div>
+    <div class="panel-body">
+        <form class="form form-inline">
+            <input class="form-control" type="text" list="recipient" ng-model="ctrl.uniqueHelp" style="width: 400px"/>
+            <datalist id="recipient">
+                <option ng-repeat="option in ctrl.uniqueHistory" value="{{option.recipient}}">{{option.recipientFirstName+' '+option.recipientLastName}}</option>
+            </datalist>
+            <input class="form-control" type="number" ng-model="ctrl.transfer2.delta"/>
+            <button class="btn btn-default" ng-click="ctrl.doTransfer3()" ng-disabled="ctrl.transfer2.delta > ctrl.amount">Przelej</button>
+        </form>
+    </div>
+</div>
