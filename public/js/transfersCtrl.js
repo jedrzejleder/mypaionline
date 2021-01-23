@@ -89,8 +89,11 @@ app.controller('TransfersCtrl', [ '$http', 'common', function($http, common) {
         $http.post('/transfer?recipient=' + ctrl.uniqueHelp, ctrl.transfer2).then(
             function(res) {
                 refreshHistory()
+                common.alert('alert-success', 'Wysłano przelew!')
             },
-            function(err) {}
+            function(err) {
+                common.alert('alert-warning', 'Niepoprawne dane do przelewu!')
+            }
         )
         ctrl.uniqueHelp = null
     }
