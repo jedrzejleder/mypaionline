@@ -1,7 +1,3 @@
-<div uib-alert class="alert-animated" ng-class="ctrl._alert.type" close="ctrl.closeAlert()" dismiss-on-timeout="3000" ng-if="ctrl._alert.text">
-    {{ctrl._alert.text}}
-</div>
-
 <table class="table table-stripped">
     <tr">
         <th>Data</th>
@@ -52,12 +48,12 @@
     <div class="panel-heading">Przelew</div>
     <div class="panel-body">
         <form class="form form-inline">
-            <input class="form-control" type="text" list="recipient" ng-model="ctrl.uniqueHelp" style="width: 400px"/>
+            <input class="form-control" type="text" list="recipient" ng-model="ctrl.recipient" style="width: 400px"/>
             <datalist id="recipient">
                 <option ng-repeat="option in ctrl.uniqueHistory" value="{{option.recipient}}">{{option.recipientFirstName+' '+option.recipientLastName}}</option>
             </datalist>
-            <input class="form-control" type="number" ng-model="ctrl.transfer2.delta"/>
-            <button class="btn btn-default" ng-click="ctrl.doTransfer3()" ng-disabled="ctrl.transfer2.delta > ctrl.amount">Przelej</button>
+            <input class="form-control" type="number" ng-model="ctrl.transfer.delta"/>
+            <button class="btn btn-default" ng-click="ctrl.doTransfer()" ng-disabled="ctrl.transfer.delta > ctrl.amount">Przelej</button>
         </form>
     </div>
 </div>

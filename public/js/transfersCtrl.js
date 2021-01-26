@@ -9,16 +9,12 @@ app.controller('TransfersCtrl', [ '$http', 'common', function($http, common) {
     ctrl.history = []
     ctrl.MyHistory = []
     ctrl.uniqueHistory = []
-    ctrl.uniqueHelp = null
+    // ctrl.uniqueHelp = null
 
-    ctrl.recipients = []
+    // ctrl.recipients = []
     ctrl.recipient = null
 
     ctrl.transfer = {
-        delta: 1.00
-    }
-
-    ctrl.transfer2 = {
         delta: 1.00
     }
 
@@ -85,27 +81,32 @@ app.controller('TransfersCtrl', [ '$http', 'common', function($http, common) {
     //     )
     // }
 
-    ctrl.doTransfer3 = function() {
-        $http.post('/transfer?recipient=' + ctrl.uniqueHelp, ctrl.transfer2).then(
+    ctrl.doTransfer = function() {
+        $http.post('/transfer?recipient=' + ctrl.recipient, ctrl.transfer).then(
             function(res) {
                 refreshHistory()
                 common.alert('alert-success', 'Wysłano przelew!')
             },
             function(err) {
-                common.alert('alert-warning', 'Niepoprawne dane do przelewu!')
+                if (ctrl.transfer.delta < 0) {
+                    common.alert('alert-warning', 'Niepoprawna kwota przelewu!')
+                }
+                else {
+                    common.alert('alert-warning', 'Niepoprawne ID!')
+                }
             }
         )
-        ctrl.uniqueHelp = null
+        ctrl.recipient = null
     }
 
-    $http.get('/personList').then(
-        function(res) {
-            ctrl.recipients = res.data
-            ctrl.recipient = null
-        }, 
-        function(err) {
-            ctrl.recipients = []
-            ctrl.recipient = null
-        }
-    )
+    // $http.get('/personList').then(
+    //     function(res) {
+    //         ctrl.recipients = res.data
+    //         ctrl.recipient = null
+    //     }, 
+    //     function(err) {
+    //         ctrl.recipients = []
+    //         ctrl.recipient = null
+    //     }
+    // )
 }])
